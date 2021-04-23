@@ -1,26 +1,39 @@
-
-// This new command will print a list the last 4 commands to the terminal, a detailed list of all content of the current directory (like ls -l).
-// Finally, it will wait for the user to hit the “return” key to terminate the shell and return the control to the original shell program on your machine.
+// Daniel Rosenthal
+// CSc 332 - Group Project
+// Group A - Exit
+// 28 April 2021
 
 #include <stdio.h>
 #include <unistd.h>
+#include <string.h>
 #include <stdlib.h>
+#define len 1024
 
-void previousCommands(); // Prints a list the last 4 commands to the terminal
-void lsDir();            // Prints a detailed list of all content of the current directory (like ls -l)
-char returnCheck = '0';  // "return" key terminates shell
+char c1[len] = "", c2[len] = "", c3[len] = "", c4[len] = ""; // Four strings to hold the four most recent commands
+void logCommand(char newCommand[]);                          // Adds any command to the log after being called in shell
+void printCommands();                                        // Prints a list the last 4 commands to the terminal
+void lsDir();                                                // Prints a detailed list of all content of the current directory (like ls -l)
+char returnCheck = '0';                                      // "return" key terminates shell
 
-void Exit() {
-    previousCommands();
+
+
+int Exit() {
+    printCommands();
     lsDir();
     while(returnCheck != 0x0A){     // 0x0A is ASCII for "return" key
         returnCheck = fgetc(stdin); // Get new user input until input is "return" key
     }
-    exit(0);                        // After "return" key, terminate shell
+    return 0;                       // After "return" key, return 0 to shell to terminate
 }
 
-void previousCommands(){
-
+void logCommand(char newCommand[]){
+    strcpy(c1, c2);
+    strcpy(c2, c3);
+    strcpy(c3, c4);
+    strcpy(c4, newCommand);
+}
+void printCommands(){
+    printf("%s\n%s\n%s\n%s\n", c4, c3, c2, c1);
 }
 void lsDir(){
         char *argv[] = {"ls", "-l", 0};

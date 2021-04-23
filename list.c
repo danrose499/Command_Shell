@@ -52,7 +52,7 @@ int main(int argc, char *argv[]){
     if(teepid == 0){
         close(pipeline.write);
         dup2(pipeline.read,0);
-        execlp("tee", "tee", "t1.txt", NULL);
+        execlp("tee", "tee", "Dir0/t1.txt", NULL);
         perror("tee");
         return 1;
     }
@@ -64,7 +64,7 @@ int main(int argc, char *argv[]){
         waitpid(teepid, &teestatus, 0);
     }
 
-    rename("t1.txt", "tree.txt");
+    rename("Dir0/t1.txt", "Dir0/tree.txt");
 
     return 0;
 }

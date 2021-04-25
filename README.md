@@ -1,9 +1,9 @@
 # Command Shell Project
 
-CSc 332 - Operating Systems
-Professor Zaid Al-Mashhadani
-The City College of New York
-Spring '21
+CSc 332 - Operating Systems  
+Professor Zaid Al-Mashhadani  
+The City College of New York  
+Spring '21  
 
 **Task:**
 The object of this assignment is to gain experience with some advanced programming techniques like process creation and control, file descriptors, signals and possibly pipes. To do this, a team of 5 students will be working together to write their own command shell - much like csh, bsh or the DOS command shell.

@@ -34,7 +34,7 @@ void printCommands(){                                        // Function: Prints
 void lsDir(){                                                // Function: Prints a detailed list of all content of the current directory (like ls -l)
     char *argv[] = {"ls", "-l", 0};
     execvp(argv[0], argv);
-    fprintf(stderr, "child ls -l failed!\n");            // Only prints if execvp fails
+    fprintf(stderr, "child ls -l failed!\n");                // Only prints if execvp fails
 }
 void waitForReturn(){                                        // Function: Waits for "return" input before returning
     while(returnCheck != 0x0A){                              // 0x0A is ASCII for "return" key

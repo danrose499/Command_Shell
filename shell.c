@@ -1,120 +1,73 @@
-#include "tree.c"
+#include <stdio.h>
+#include <errno.h>
+#include <unistd.h>
+#include <sys/wait.h>
+#include <string.h>
+#include <stdlib.h>
+
+#include "exit.c"
 #include "list.c"
 #include "path.c"
-#include "exit.c"
+#include "tree.c"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <errno.h>
-#include <string.h>
-
-#ifndef SHELL_H
-#define SHELL_H
-
-void print_prompt1(void);
-// void print_prompt2(void);
-
-char *read_cmd(void);
-
-#endif
-
-void print_prompt1(void)
+int main(int argc, char *argv[])
 {
-    fprintf(stderr, "# ");
-}
+    //printf("\nEnter a command or press 'q' or 'Q' to quit:\n");
+    int cont = 1;
+    pid_t pid;
 
-int main(int argc, char **argv)
-{
-    char *command;
-
-    do
+    while (1) // while true
     {
-        command = read_cmd();
-        print_prompt1();
+        char commandInput[1000];
+        printf("# ");
 
-        if (!command)
-        {
-            exit(EXIT_SUCCESS);
+        /* read input until ENTER is pressed */
+        // %[^\n]s : it is an edit conversion code that can be an alternative of gets(), and terminates with a newline
+        scanf(" %[^\n]s", commandInput); // scanf allow us to scan input from standard in pr keyboard
+
+        // block of code to quit the program if the user enters either 'q' or 'Q'
+        if (!strcmp(commandInput, "tree")) {
+            Tree();
         }
-
-        else if (command[0] == '\0' || strcmp(command, "\n") == 0)
-        {
-            free(command);
-            continue;
+        else if (!strcmp(commandInput, "list")){
+            List();
         }
-
-        else if (strcmp(command, "exit\n") == 0)
-        {
-            free(command);
-            break;
+        else if (!strcmp(commandInput, "path")){
+            Path();
         }
-        
-        else if(strcmp(command, "list") == 0)
-        {
-	    List();
-            continue;
-	}
-
-        printf("%s\n", command);
-
-        free(command);
-
-    } while (1);
-
-    exit(EXIT_SUCCESS);
-}
-
-char *read_cmd(void)
-{
-    char buf[1024];
-    char *ptr = NULL;
-    char ptrlen = 0;
-
-    while (fgets(buf, 1024, stdin))
-    {
-        int bufferlen = strlen(buf);
-
-        if (!ptr)
-        {
-            ptr = malloc(bufferlen + 1);
+        else if (!strcmp(commandInput, "exit")) {
+            return Exit();
         }
-        else
-        {
-            char *ptr2 = realloc(ptr, ptrlen + bufferlen + 1);
+        else {
+            // continue the program if not quit is pressed!
+            char *arg[100], *token, *status = NULL;
+            int i = 0;
 
-            if (ptr2)
+            // array pointer going to the next token, or NULL if there ar enot more tokens
+            for (token = strtok_r(commandInput, " ", &status); token != NULL; token = strtok_r(NULL, " ", &status))
             {
-                ptr = ptr2;
+                arg[i] = token; // arguments store in array arg
+                i++;
             }
+            arg[i] = NULL; // clear array
+
+            pid = fork(); // fork child process to be executed
+
+            if (pid == 0)
+            {
+                execvp(arg[0], arg); // replaces the current process with a new one specified by the file
+                printf("File/command NOT Found\n");
+                return 0;
+            }
+
             else
             {
-                free(ptr);
-                ptr = NULL;
+                wait(NULL); // parent waits until child finishes
             }
         }
+            
+            
 
-        if (!ptr)
-        {
-            fprintf(stderr, "error: failed to alloc buffer: %s\n", strerror(errno));
-            return NULL;
-        }
-
-        strcpy(ptr + ptrlen, buf);
-
-        if (buf[bufferlen - 1] == '\n')
-        {
-            if (bufferlen == 1 || buf[bufferlen - 2] != '\\')
-            {
-                return ptr;
-            }
-
-            ptr[ptrlen + bufferlen - 2] = '\0';
-            bufferlen -= 2;
-            // print_prompt2();
-        }
-
-        ptrlen += bufferlen;
     }
-
-    return ptr;
+    return 0;
 }

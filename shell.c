@@ -51,9 +51,9 @@ int main(int argc, char **argv)
         
         else if(strcmp(command, "list") == 0)
         {
-			List();
+	    List();
             continue;
-		}
+	}
 
         printf("%s\n", command);
 

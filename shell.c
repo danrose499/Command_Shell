@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
         // %[^\n]s : it is an edit conversion code that can be an alternative of gets(), and terminates with a newline
         scanf(" %[^\n]s", commandInput); // scanf allow us to scan input from standard in pr keyboard
 
-        // block of code to quit the program if the user enters either 'q' or 'Q'
+        logCommand(commandInput);
         if (!strcmp(commandInput, "tree")) {
             Tree();
         }
@@ -64,10 +64,7 @@ int main(int argc, char *argv[])
             {
                 wait(NULL); // parent waits until child finishes
             }
-        }
-            
-            
-
+        }   
     }
     return 0;
 }

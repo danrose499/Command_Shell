@@ -1,7 +1,8 @@
-// #include "tree.c"
-// #include "list.c"
-// #include "path.c"
-// #include "exit.c"
+#include "tree.c"
+#include "list.c"
+#include "path.c"
+#include "exit.c"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
@@ -22,17 +23,23 @@ int main(int argc, char **argv)
             exit(EXIT_SUCCESS);
         }
 
-        if (command[0] == '\0' || strcmp(command, "\n") == 0)
+        else if (command[0] == '\0' || strcmp(command, "\n") == 0)
         {
             free(command);
             continue;
         }
 
-        if (strcmp(command, "exit\n") == 0)
+        else if (strcmp(command, "exit\n") == 0)
         {
             free(command);
             break;
         }
+        
+        else if(strcmp(command, "list") == 0)
+        {
+			List();
+            continue;
+		}
 
         printf("%s\n", command);
 

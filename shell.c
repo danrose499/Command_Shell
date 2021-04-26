@@ -7,7 +7,21 @@
 #include <stdlib.h>
 #include <errno.h>
 #include <string.h>
-#include "exec.h"
+
+#ifndef SHELL_H
+#define SHELL_H
+
+void print_prompt1(void);
+// void print_prompt2(void);
+
+char *read_cmd(void);
+
+#endif
+
+void print_prompt1(void)
+{
+    fprintf(stderr, "# ");
+}
 
 int main(int argc, char **argv)
 {
@@ -49,6 +63,7 @@ int main(int argc, char **argv)
 
     exit(EXIT_SUCCESS);
 }
+
 char *read_cmd(void)
 {
     char buf[1024];
@@ -95,7 +110,7 @@ char *read_cmd(void)
 
             ptr[ptrlen + bufferlen - 2] = '\0';
             bufferlen -= 2;
-            print_prompt2();
+            // print_prompt2();
         }
 
         ptrlen += bufferlen;

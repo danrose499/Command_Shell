@@ -9,11 +9,10 @@ Group A - Path
 
 #include <stdio.h>
 #include <unistd.h>
-#include <limits.h>
-#include <sys/types.h>
+#include <limits.h> // Where we get PATH_MAX from
+#include <sys/types.h> 
 #include <sys/stat.h>
 #include <fcntl.h>
-#include <string.h>
 #include <errno.h>
 
 int Path(){

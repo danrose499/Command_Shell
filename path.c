@@ -26,7 +26,6 @@ int Path(){
     if(fdT2 < 0){ // Checks for Open Error
         printf("Error occured when opening file %s\n", cwd);
         perror("open");
-        
     }   
 
     else{ // If no Error, print path into t2.txt

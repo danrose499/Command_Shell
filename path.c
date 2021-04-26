@@ -19,7 +19,7 @@ Group A - Path
 int main(){
 
     char cwd[PATH_MAX]; // Current Working Directory
-    getcwd(cwd,sizeof(cwd)); // Returns Null-Terminated String Containing an Absolute Path Name that is the Current Working Directory
+    getcwd(cwd,sizeof(cwd)); // Returns Null-Terminated String Containing an Absolute Path Name that is the Current Working Directory, places pathname in cwd
     printf("%s\n", cwd);
     
     int fdT2 = open("Dir0/t2.txt", O_WRONLY); // Opens t2.txt in Read-Only Mode

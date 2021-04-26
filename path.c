@@ -18,7 +18,7 @@ Group A - Path
 
 int main(){
 
-    char cwd[PATH_MAX] = {"\0"}; // Current Working Directory
+    char cwd[PATH_MAX]; // Current Working Directory
     getcwd(cwd,sizeof(cwd)); // Returns Null-Terminated String Containing an Absolute Path Name that is the Current Working Directory
     printf("%s\n", cwd);
     

@@ -13,7 +13,7 @@ struct Pipe{
     int write;
 };
 
-int list(int argc, char *argv[]){
+int List(int argc, char *argv[]){
     int clearpid;
     int clearstatus = 1;
     struct Pipe pipeline;

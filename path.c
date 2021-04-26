@@ -16,7 +16,7 @@ Group A - Path
 #include <string.h>
 #include <errno.h>
 
-int main(){
+int Path(){
 
     char cwd[PATH_MAX]; // Current Working Directory
     getcwd(cwd,sizeof(cwd)); // Returns Null-Terminated String Containing an Absolute Path Name that is the Current Working Directory, places pathname in cwd

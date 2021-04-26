@@ -12,7 +12,7 @@
 //this library is used for chdir - to change the directory
 #include <unistd.h>
 
-int Tree(){
+void Tree(){
     //there is an error when trying to create a directory called Dir0
     if(mkdir("Dir0", 0777) == -1){
         perror("mkdir");
@@ -54,7 +54,6 @@ int Tree(){
             }
         }
     }
-    return 0;
 }
 
 

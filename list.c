@@ -13,7 +13,7 @@ struct Pipe{
     int write;
 };
 
-int List(int argc, char *argv[]){
+void List(){
     int clearpid;
     int clearstatus = 1;
     struct Pipe pipeline;
@@ -23,7 +23,7 @@ int List(int argc, char *argv[]){
     if(clearpid == 0){
         //inside child process
         execlp("clear", "clear", NULL);
-        return 1;
+
     }  
 
     while(!WIFEXITED(clearstatus)){
@@ -40,7 +40,7 @@ int List(int argc, char *argv[]){
         close(pipeline.read);
         dup2(pipeline.write,1);
         execlp("ls", "ls", "-l", NULL);
-        return 1;
+
     }
 
     while(!WIFEXITED(lsstatus)){
@@ -52,9 +52,9 @@ int List(int argc, char *argv[]){
     if(teepid == 0){
         close(pipeline.write);
         dup2(pipeline.read,0);
-        execlp("tee", "tee", "Dir0/t1.txt", NULL);
+        execlp("tee", "tee", "t1.txt", NULL);
         perror("tee");
-        return 1;
+
     }
 
     close(pipeline.read);
@@ -64,7 +64,6 @@ int List(int argc, char *argv[]){
         waitpid(teepid, &teestatus, 0);
     }
 
-    rename("Dir0/t1.txt", "Dir0/tree.txt");
+    rename("t1.txt", "tree.txt");
 
-    return 0;
 }

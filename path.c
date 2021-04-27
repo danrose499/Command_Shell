@@ -4,7 +4,6 @@ Rafael-David Sanchez
 CSc 332
 Group A - Path
 28 April 2021
-
 */
 
 #include <stdio.h>
@@ -18,9 +17,9 @@ int Path(){
     getcwd(cwd,sizeof(cwd)); // Returns Null-Terminated String Containing an Absolute Path Name that is the Current Working Directory, places pathname in cwd
     printf("%s\n", cwd); // Prints Current Working Directory to Terminal
     
-    int fdT2 = open("Dir0/t2.txt", O_WRONLY); // Opens t2.txt in Write-Only Mode
+    int fdT2 = open("t2.txt", O_WRONLY); // Opens t2.txt in Write-Only Mode
     if(fdT2 < 0){ // Checks for Open Error
-        printf("Error occured when opening file %s\n", cwd);
+        printf("Error occured when opening file t2.txt\n");
         perror("open");
     }   
 
@@ -33,7 +32,7 @@ int Path(){
     close(fdT2); // Closes fdT2
     }
 
-    int name = rename("Dir0/t2.txt", "Dir0/path.txt"); // Renames t2.txt to path.txt
+    int name = rename("t2.txt", "path.txt"); // Renames t2.txt to path.txt
     if(name < 0){ // Checks for Renaming Error
         printf("Error renaming the file\n");
         perror("rename");   
@@ -46,14 +45,14 @@ int Path(){
         return 1;
     }
     
-    int fdPath = open("Dir0/path.txt", O_RDONLY); // Opens path.txt in Read-Only Mode
+    int fdPath = open("path.txt", O_RDONLY); // Opens path.txt in Read-Only Mode
     if(fdPath < 0){ // Checks for Open Error
         printf("Error occured when opening path.txt\n");
         perror("open");
         return 1;    
     }
     
-    int fdT3 = open("Dir0/t3.txt", O_WRONLY);
+    int fdT3 = open("t3.txt", O_WRONLY);
     if(fdT3 < 0){ // Checks for Open Error
         printf("Error occured when opening t3.txt\n");
         perror("open");
@@ -74,7 +73,7 @@ int Path(){
     close(fdPath); // Closes path.txt
     close(fdT3); // Closes t3.txt
 
-    name = rename("Dir0/t3.txt", "Dir0/log.txt"); // Changes name of t3.txt to log.txt
+    name = rename("t3.txt", "log.txt"); // Changes name of t3.txt to log.txt
     if(name < 0){ // Checks for Renaming Error
         printf("Error renaming the file\n");
         perror("rename");   
@@ -86,7 +85,7 @@ int Path(){
         perror("remove");   
     }    
     
-    delete = remove("Dir0/path.txt"); // Deletes path.txt
+    delete = remove("path.txt"); // Deletes path.txt
     if(delete != 0){ // Checks for Deletion Error
         printf("Error deleting the file\n");
         perror("remove");    

@@ -10,18 +10,15 @@ Group A - Path
 #include <stdio.h>
 #include <unistd.h>
 #include <limits.h> // Where we get PATH_MAX from
-#include <sys/types.h> 
-#include <sys/stat.h>
 #include <fcntl.h>
-#include <errno.h>
 
 int Path(){
 
     char cwd[PATH_MAX]; // Current Working Directory
     getcwd(cwd,sizeof(cwd)); // Returns Null-Terminated String Containing an Absolute Path Name that is the Current Working Directory, places pathname in cwd
-    printf("%s\n", cwd);
+    printf("%s\n", cwd); // Prints Current Working Directory to Terminal
     
-    int fdT2 = open("Dir0/t2.txt", O_WRONLY); // Opens t2.txt in Read-Only Mode
+    int fdT2 = open("Dir0/t2.txt", O_WRONLY); // Opens t2.txt in Write-Only Mode
     if(fdT2 < 0){ // Checks for Open Error
         printf("Error occured when opening file %s\n", cwd);
         perror("open");
@@ -29,8 +26,8 @@ int Path(){
 
     else{ // If no Error, print path into t2.txt
         int i = 0;
-        while(*(cwd+i) !='\0') { // While loop that goes until it reaches the null termination character 
-            write(fdT2, cwd+i, 1); // Writes into t2.txt   
+        while(cwd[i] !='\0') { // While loop that goes until it reaches the null termination character 
+            write(fdT2, cwd + i, 1); // Writes into t2.txt   
             i++;
         }
     close(fdT2); // Closes fdT2

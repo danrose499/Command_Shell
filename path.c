@@ -34,7 +34,7 @@ int Path(){
 
     int name = rename("t2.txt", "path.txt"); // Renames t2.txt to path.txt
     if(name < 0){ // Checks for Renaming Error
-        printf("Error renaming the file\n");
+        printf("Error renaming t2.txt\n");
         perror("rename");   
     }    
     
@@ -75,19 +75,19 @@ int Path(){
 
     name = rename("t3.txt", "log.txt"); // Changes name of t3.txt to log.txt
     if(name < 0){ // Checks for Renaming Error
-        printf("Error renaming the file\n");
+        printf("Error renaming t3.txt\n");
         perror("rename");   
     }    
     
     int delete = remove("tree.txt"); // Deletes tree.txt
     if(delete != 0){ // Checks for Deletion Error
-        printf("Error deleting the file\n");
+        printf("Error deleting tree.txt\n");
         perror("remove");   
     }    
     
     delete = remove("path.txt"); // Deletes path.txt
     if(delete != 0){ // Checks for Deletion Error
-        printf("Error deleting the file\n");
+        printf("Error deleting path.txt\n");
         perror("remove");    
     }
 

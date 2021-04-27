@@ -8,6 +8,8 @@
 #include <errno.h>
 #include <fcntl.h>
 
+// I'm using a struct here instead of a 2-element array because it is stored in memory
+// in the same way, and it makes my code more readable.
 struct Pipe{
     int read;
     int write;
@@ -38,7 +40,7 @@ void List(){
     if(lspid == 0){
         //inside the child process
         close(pipeline.read);
-        dup2(pipeline.write,1);
+        dup2(pipeline.write,1); //passing stdout to the pipe
         execlp("ls", "ls", "-l", NULL);
 
     }
@@ -47,6 +49,10 @@ void List(){
         waitpid(lspid, &lsstatus, 0);
     }
 
+    // tee is a command which, according to the BSD General Commands Manual:
+    // "copies standard input to standard output, making a copy in zero or more files.  The output is unbuffered."
+    // Therefore, we can use tee here to write to t1.txt
+    
     int teepid = fork();
     int teestatus = 1;
     if(teepid == 0){

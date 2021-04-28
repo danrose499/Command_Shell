@@ -11,6 +11,8 @@
 #include <sys/types.h>
 //this library is used for chdir - to change the directory
 #include <unistd.h>
+//this library will check the errno value for the fopen command
+#include <errno.h>
 
 void Tree(){
     //there is an error when trying to create a directory called Dir0
@@ -30,15 +32,44 @@ void Tree(){
         else{
             printf("Dir0 created \n");
             FILE *file1, *file2, *file3;
+            errno = 0;
             //create t1.txt
             file1 = fopen("t1.txt", "w");
-            printf("t1.txt created \n");
+            //check if there was an error in creating the file
+            if(errno != 0){
+                perror("error when creating the file \n");
+            }
+            //if there is no error then print following message
+            else{ 
+                printf("t1.txt created \n");
+                
+            }
+            
+            //resets the value of errno
+            errno = 0;
             //create t2.txt
             file2 = fopen("t2.txt", "w");
-            printf("t2.txt created \n");
-            //create t2.txt
+            //check if there was an error in creating the file
+            if(errno != 0){
+                perror("error when creating the file \n");
+            }
+            //if there is no error then print following message
+            else{
+                printf("t2.txt created \n");
+            }
+            
+            //resets the value of errno
+            errno = 0;
+            //create t3.txt
             file3 = fopen("t3.txt", "w");
-            printf("t3.txt created \n");
+            //check if there was an error in creating the file
+            if(errno != 0){
+                perror("error when creating the file \n");
+            }
+            //if there is no error then print following message
+            else{
+                printf("t3.txt created \n");
+            }
             
             fclose(file1); //will close t1.txt
             fclose(file2); //will close t2.txt
@@ -55,5 +86,4 @@ void Tree(){
         }
     }
 }
-
 

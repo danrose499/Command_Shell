@@ -6,8 +6,8 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
+#define len 1024                                             // Default value set for length of c strings declared below 
 
-const int len = 1024;                                        // Default value set for length of c strings declared below 
 char c1[len] = "", c2[len] = "", c3[len] = "", c4[len] = ""; // Four c strings to hold the four most recent commands; Values are updated in logCommand() and printed in printCommands()
 char returnCheck = '0';                                      // "return" key terminates shell with; Used in waitForReturn() function
 

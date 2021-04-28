@@ -8,8 +8,7 @@
 #include <string.h>
 #define len 1024                                             // Default value set for length of c strings declared below 
 
-char c1[len] = "", c2[len] = "", c3[len] = "", c4[len] = ""; // Four c strings to hold the four most recent commands; Values are updated in logCommand() and printed in printCommands()
-char returnCheck = '0';                                      // "return" key terminates shell with; Used in waitForReturn() function
+char c1[len] = "", c2[len] = "", c3[len] = "", c4[len] = ""; // Four c strings to hold the four most recent commands; Values are updated in logCommand() and printed in printCommands()                                           
 
 void logCommand(char newCommand[]);                          // Called in shell.c after shell.c executes a command adding that command to the command log
 void printCommands();                                        // Prints a list the last 4 commands to the terminal
@@ -34,10 +33,11 @@ void printCommands(){                                        // Function: Prints
 void lsDir(){                                                // Function: Prints a detailed list of all content of the current directory (like ls -l)
     char *argv[] = {"ls", "-l", 0};
     execvp(argv[0], argv);
-    fprintf(stderr, "child ls -l failed!\n");                // Only prints if execvp fails
+    fprintf(stderr, "ls -l failed!\n");                      // Prints if execvp fails
 }
 void waitForReturn(){                                        // Function: Waits for "return" input before returning
-    while(returnCheck != 0x0A){                              // 0x0A is ASCII for "return" key
+    char returnCheck = 0x00;                                 // Variable to store user input key and check for "return"
+    while(returnCheck != 0x0A){                              // Wait for "return" (0x0A is ASCII for "return" key)
         returnCheck = fgetc(stdin);                          // Get new user input until input is "return" key
     }
 }

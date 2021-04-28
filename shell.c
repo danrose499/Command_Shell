@@ -11,10 +11,10 @@
 #include <stdlib.h>
 
 // include files for customized commands
-#include "exit.c"
+#include "tree.c"
 #include "list.c"
 #include "path.c"
-#include "tree.c"
+#include "exit.c"
 
 int main(int argc, char *argv[])
 {

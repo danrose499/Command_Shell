@@ -5,7 +5,7 @@
 
 //  the tree command will create a directory called Dir0. Then it will change the working directory to Dir0, and create empty text files t1.txt, t2.txt, t3.txt, and one empty directory, called Dir1, inside of it.
 
-#include <stdio.h> //refers to perror
+#include <stdio.h> //refers to perror and fopen command
 //both libraries below are used to create a directory
 #include <sys/stat.h>
 #include <sys/types.h>

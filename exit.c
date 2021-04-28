@@ -44,7 +44,8 @@ void lsDir(){                                                // Function: Prints
 }
 void waitForReturn(){                                        // Function: Waits for "return" input before returning
     char returnCheck = 0x00;                                 // Variable to store user input key and check for "return"
-    while(returnCheck != 0x0A){                              // Wait for "return" (0x0A is ASCII for "return" key)
+    while(returnCheck != '\n'){                              // Wait for "return" ('\n' checks for breakline)
+        getchar();                                           // Consumes prior extra return
         printf("\nPress RETURN to return the control to the original shell program:\n");
         returnCheck = getchar();                             // Get new user input until input is "return" key
     }
